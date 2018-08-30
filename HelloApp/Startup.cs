@@ -20,6 +20,8 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            int x = 2;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -27,7 +29,8 @@ namespace HelloApp
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                x *= 2; // 2 * 2 = 4
+                await context.Response.WriteAsync($"Result {x}");
             });
         }
     }
