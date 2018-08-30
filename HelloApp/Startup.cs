@@ -17,7 +17,7 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDirectoryBrowser();
+            //services.AddDirectoryBrowser();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,12 +28,20 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDirectoryBrowser( new DirectoryBrowserOptions()
+            //app.UseDirectoryBrowser( new DirectoryBrowserOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot")),
+            //    RequestPath = new PathString("/pages")
+            //});
+
+            app.UseStaticFiles(); // обрабатывает все запросы к wwwroot
+            app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot")),
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"static")),
                 RequestPath = new PathString("/pages")
             });
-            app.UseStaticFiles();
+
 
             app.Run(async (context) =>
             {
