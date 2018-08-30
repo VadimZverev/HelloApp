@@ -25,19 +25,20 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
-            int x = 5;
-            int y = 8;
-            int z = 0;
+            int x = 2;
 
             app.Use(async (context, next) =>
             {
-                z = x * y;
-                await next.Invoke();
+                x *= 2; // 2 * 2 = 4
+                await next.Invoke(); // вызов app.Run
+                x *= 2; // 8 * 2 = 16
+                await context.Response.WriteAsync($"Результат: {x}");
             });
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync($"x * y = {z}");
+                x *= 2; // 4 *2 = 8
+                await Task.FromResult(0);
             });
 
             //app.Run(Handle);
