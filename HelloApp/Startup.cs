@@ -25,10 +25,23 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Map("/index", Index);
+            app.Map("/about", About);
+
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response.WriteAsync("Page Not Found");
             });
+        }
+
+        private static void Index(IApplicationBuilder app)
+        {
+            app.Run(async context => await context.Response.WriteAsync("Index"));
+        }
+
+        private static void About(IApplicationBuilder app)
+        {
+            app.Run(async context => await context.Response.WriteAsync("About"));
         }
     }
 }
