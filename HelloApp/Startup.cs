@@ -25,7 +25,7 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseToken();
+            app.UseToken("5555");
 
             app.Run(async (context) =>
             {
