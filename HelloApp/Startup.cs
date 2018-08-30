@@ -34,14 +34,24 @@ namespace HelloApp
             //    RequestPath = new PathString("/pages")
             //});
 
-            app.UseStaticFiles(); // обрабатывает все запросы к wwwroot
-            app.UseStaticFiles(new StaticFileOptions()
+            //app.UseStaticFiles(); // обрабатывает все запросы к wwwroot
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), @"static")),
+            //    RequestPath = new PathString("/pages")
+            //});
+
+            //app.UseFileServer(enableDirectoryBrowsing: true);
+
+            app.UseFileServer(new FileServerOptions()
             {
+                EnableDirectoryBrowsing = true,
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), @"static")),
-                RequestPath = new PathString("/pages")
+                RequestPath = new PathString("/pages"),
+                EnableDefaultFiles = false
             });
-
 
             app.Run(async (context) =>
             {
