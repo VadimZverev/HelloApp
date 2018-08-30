@@ -25,7 +25,22 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(Handle);
+            int x = 5;
+            int y = 8;
+            int z = 0;
+
+            app.Use(async (context, next) =>
+            {
+                z = x * y;
+                await next.Invoke();
+            });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync($"x * y = {z}");
+            });
+
+            //app.Run(Handle);
         }
 
         private async Task Handle(HttpContext context)
