@@ -25,6 +25,7 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware<ErrorHandleMiddleware>();
             app.UseMiddleware<AuthenticationMiddleware>();
             app.UseMiddleware<RoutingMiddleware>();
         }
