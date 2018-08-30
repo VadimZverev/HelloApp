@@ -25,7 +25,7 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<TokenMiddleware>();
+            app.UseToken();
 
             app.Run(async (context) =>
             {
