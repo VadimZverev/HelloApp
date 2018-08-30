@@ -19,6 +19,7 @@ namespace HelloApp
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>() // установка класса Startup, как стартового
+                .UseWebRoot("static"); // установка папки static, как корневой каталог статических файлов
     }
 }
