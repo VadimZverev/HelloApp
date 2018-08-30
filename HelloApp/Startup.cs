@@ -27,7 +27,13 @@ namespace HelloApp
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                string host = context.Request.Host.Value;
+                string path = context.Request.Path;
+                string query = context.Request.QueryString.Value;
+                context.Response.ContentType = "text/html;charset=utf-8";
+                await context.Response.WriteAsync($"<h3>Хост: {host}</h3>" +
+                    $"<h3>Путь запроса: {path}</h3>" +
+                    $"<h3>Параметры строки запроса: {query}</h3");
             });
         }
     }
