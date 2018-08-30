@@ -32,7 +32,7 @@ namespace HelloApp
                 x *= 2; // 2 * 2 = 4
                 await next.Invoke(); // вызов app.Run
                 x *= 2; // 8 * 2 = 16
-                await context.Response.WriteAsync($"Результат: {x}");
+                await context.Response.WriteAsync($"Result: {x}");
             });
 
             app.Run(async (context) =>
