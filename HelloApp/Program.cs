@@ -14,7 +14,14 @@ namespace HelloApp
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            //CreateWebHostBuilder(args).Build().Run();
+            var host = new WebHostBuilder()
+                .UseKestrel()               // настраиваем веб-сервер Kestrel
+                .UseContentRoot(Directory.GetCurrentDirectory())    // настраиваем корневой каталог приложения
+                .UseIISIntegration()        // обеспечиваем интеграцию с IIS
+                .UseStartup<Startup>()      // устанавливаем главный файл приложения
+                .Build();                   // создаём хост
+            host.Run();                     // запускаем приложение
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
