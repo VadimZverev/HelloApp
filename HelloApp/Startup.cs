@@ -20,13 +20,17 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // если приложение в процессе разработке
             if (env.IsDevelopment())
             {
+                // то выводится информация об ошибке, при наличии ошибки
                 app.UseDeveloperExceptionPage();
             }
 
+            // обработка запроса - получаем контекст запроса в виде объекта context
             app.Run(async (context) =>
             {
+                // отправка ответа в виде строки "Hello World!"
                 await context.Response.WriteAsync("Hello World!");
             });
         }
