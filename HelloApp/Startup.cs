@@ -25,26 +25,21 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Map("/home", home =>
+            app.MapWhen(context =>
             {
-                home.Map("/index", Index);
-                home.Map("/about", About);
-            });
+                return context.Request.Query.ContainsKey("id") &&
+                        context.Request.Query["id"] == "5";
+            }, HandleId);
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Page Not Found");
+                await context.Response.WriteAsync("Good bye, World...");
             });
         }
 
-        private static void Index(IApplicationBuilder app)
+        private void HandleId(IApplicationBuilder app)
         {
-            app.Run(async context => await context.Response.WriteAsync("Index"));
-        }
-
-        private static void About(IApplicationBuilder app)
-        {
-            app.Run(async context => await context.Response.WriteAsync("About"));
+            app.Run(async context => await context.Response.WriteAsync("id is equal to 5"));
         }
     }
 }
