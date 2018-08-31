@@ -15,6 +15,11 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                options.HttpsPort = 44369;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -25,6 +30,7 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
