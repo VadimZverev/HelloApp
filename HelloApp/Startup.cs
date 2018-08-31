@@ -49,16 +49,34 @@ namespace HelloApp
             //});
 
             app.UseSession();
+            //app.Run(async (context) =>
+            //{
+            //    if (context.Session.Keys.Contains("name"))
+            //    {
+            //        await context.Response.WriteAsync($"Привет {context.Session.GetString("name")}!");
+            //    }
+            //    else
+            //    {
+            //        context.Response.ContentType = "text/html;charset=utf-8";
+            //        context.Session.SetString("name", "Tom");
+            //        await context.Response.WriteAsync($"Привет Мир!");
+            //    }
+            //});
+
             app.Run(async (context) =>
             {
-                if (context.Session.Keys.Contains("name"))
+                if (context.Session.Keys.Contains("person"))
                 {
-                    await context.Response.WriteAsync($"Привет {context.Session.GetString("name")}!");
+                    Person person = context.Session.Get<Person>("person");
+                    await context.Response.WriteAsync($"Привет {person.Name}!");
                 }
                 else
                 {
                     context.Response.ContentType = "text/html;charset=utf-8";
-                    context.Session.SetString("name", "Tom");
+
+                    Person person = new Person { Name = "Tom", Age = 22 };
+                    context.Session.Set("person", person);
+
                     await context.Response.WriteAsync($"Привет Мир!");
                 }
             });
