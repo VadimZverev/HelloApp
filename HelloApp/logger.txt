@@ -1,0 +1,30 @@
+Failed to locate the development https certificate at '(null)'.
+Using development certificate: CN=localhost (Thumbprint: E1CF9E5907D955FDCEBFA752870521487512C69A)
+Hosting started
+Connection id "0HLGF31VLVLCJ" started.
+Loaded hosting startup assembly HelloApp
+Connection id "0HLGF31VLVLCJ" received FIN.
+Connection id "0HLGF31VLVLCJ" sending FIN.
+Failed to authenticate HTTPS connection.
+Connection id "0HLGF31VLVLCJ" stopped.
+Connection id "0HLGF31VLVLCK" started.
+Request starting HTTP/1.1 GET https://localhost:5001/  
+Wildcard detected, all requests with hosts will be allowed.
+All hosts are allowed.
+Processing request /
+Connection id "0HLGF31VLVLCK" completed keep alive response.
+Request finished in 83.3791ms 200 
+Request starting HTTP/1.1 GET https://localhost:5001/рщьу  
+All hosts are allowed.
+Processing request /%D1%80%D1%89%D1%8C%D1%83
+Connection id "0HLGF31VLVLCK" completed keep alive response.
+Request finished in 87.0619ms 200 
+Request starting HTTP/1.1 GET https://localhost:5001/index/home  
+All hosts are allowed.
+Processing request /index/home
+Connection id "0HLGF31VLVLCK" completed keep alive response.
+Request finished in 58.432ms 200 
+Connection id "0HLGF31VLVLCK" reset.
+Connection id "0HLGF31VLVLCK" disconnecting.
+Connection id "0HLGF31VLVLCK" sending FIN.
+Connection id "0HLGF31VLVLCK" stopped.
