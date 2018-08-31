@@ -15,6 +15,8 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,26 +33,41 @@ namespace HelloApp
             //    await next.Invoke();
             //});
 
+            //app.Run(async (context) =>
+            //{
+            //    if (context.Request.Cookies.ContainsKey("name"))
+            //    {
+            //        string name = context.Request.Cookies["name"];
+            //        await context.Response.WriteAsync($"Привет {name}");
+            //    }
+            //    else
+            //    {
+            //        context.Response.ContentType = "text/html;charset=utf-8";
+            //        context.Response.Cookies.Append("name", "Tom");
+            //        await context.Response.WriteAsync($"Привет Мир!");
+            //    }
+            //});
+
+            app.UseSession();
             app.Run(async (context) =>
             {
-                if (context.Request.Cookies.ContainsKey("name"))
+                if (context.Session.Keys.Contains("name"))
                 {
-                    string name = context.Request.Cookies["name"];
-                    await context.Response.WriteAsync($"Привет {name}");
+                    await context.Response.WriteAsync($"Привет {context.Session.GetString("name")}!");
                 }
                 else
                 {
                     context.Response.ContentType = "text/html;charset=utf-8";
-                    context.Response.Cookies.Append("name", "Tom");
+                    context.Session.SetString("name", "Tom");
                     await context.Response.WriteAsync($"Привет Мир!");
                 }
             });
 
-            app.Run(async (context) =>
-            {
-                //context.Response.ContentType = "text/html;charset=utf-8";
-                await context.Response.WriteAsync($"Текст: {context.Items["text"]}");
-            });
+            //app.Run(async (context) =>
+            //{
+            //context.Response.ContentType = "text/html;charset=utf-8";
+            //    await context.Response.WriteAsync($"Текст: {context.Items["text"]}");
+            //});
         }
     }
 }
