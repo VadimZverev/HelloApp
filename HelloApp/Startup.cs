@@ -32,6 +32,11 @@ namespace HelloApp
                 pipeline(next => SendResponseAsync);
             });
 
+            app.UseOwin(pipeline =>
+            {
+                pipeline(next => SendResponseAsync);
+            });
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
