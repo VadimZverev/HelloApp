@@ -25,15 +25,30 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Use(async (context, next) =>
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Items["text"] = "Text from HttpContext.Items";
+            //    await next.Invoke();
+            //});
+
+            app.Run(async (context) =>
             {
-                context.Items["text"] = "Text from HttpContext.Items";
-                await next.Invoke();
+                if (context.Request.Cookies.ContainsKey("name"))
+                {
+                    string name = context.Request.Cookies["name"];
+                    await context.Response.WriteAsync($"Привет {name}");
+                }
+                else
+                {
+                    context.Response.ContentType = "text/html;charset=utf-8";
+                    context.Response.Cookies.Append("name", "Tom");
+                    await context.Response.WriteAsync($"Привет Мир!");
+                }
             });
 
             app.Run(async (context) =>
             {
-                context.Response.ContentType = "text/html;charset=utf-8";
+                //context.Response.ContentType = "text/html;charset=utf-8";
                 await context.Response.WriteAsync($"Текст: {context.Items["text"]}");
             });
         }
