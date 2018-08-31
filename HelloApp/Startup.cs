@@ -25,9 +25,16 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Use(async (context, next) =>
+            {
+                context.Items["text"] = "Text from HttpContext.Items";
+                await next.Invoke();
+            });
+
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                context.Response.ContentType = "text/html;charset=utf-8";
+                await context.Response.WriteAsync($"Текст: {context.Items["text"]}");
             });
         }
     }
