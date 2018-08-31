@@ -27,6 +27,11 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseOwin(pipeline =>
+            {
+                pipeline(next => SendResponseAsync);
+            });
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
@@ -41,7 +46,7 @@ namespace HelloApp
             byte[] responseByte = Encoding.UTF8.GetBytes(responseText);
 
             // получаем поток ответа
-            var responseStream = (Stream)environment["owin.responseBody"];
+            var responseStream = (Stream)environment["owin.ResponseBody"];
             // отправка ответа
             return responseStream.WriteAsync(responseByte, 0, responseByte.Length);
         }
