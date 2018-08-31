@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +31,19 @@ namespace HelloApp
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+        }
+
+        public Task SendResponseAsync(IDictionary<string, object> environment)
+        {
+            // определяем ответ
+            string responseText = "Hello ASP.NET Core";
+            // кодируем его в массив байтов
+            byte[] responseByte = Encoding.UTF8.GetBytes(responseText);
+
+            // получаем поток ответа
+            var responseStream = (Stream)environment["owin.responseBody"];
+            // отправка ответа
+            return responseStream.WriteAsync(responseByte, 0, responseByte.Length);
         }
     }
 }
