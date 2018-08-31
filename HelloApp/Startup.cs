@@ -31,29 +31,33 @@ namespace HelloApp
             {
                 pipeline(next => SendResponseAsync);
             });
-
-            app.UseOwin(pipeline =>
-            {
-                pipeline(next => SendResponseAsync);
-            });
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
         }
+
+        //public Task SendResponseAsync(IDictionary<string, object> environment)
+        //{
+        //    // определяем ответ
+        //    string responseText = "Hello ASP.NET Core";
+        //    // кодируем его в массив байтов
+        //    byte[] responseByte = Encoding.UTF8.GetBytes(responseText);
+
+        //    // получаем поток ответа
+        //    var responseStream = (Stream)environment["owin.ResponseBody"];
+        //    // отправка ответа
+        //    return responseStream.WriteAsync(responseByte, 0, responseByte.Length);
+        //}
 
         public Task SendResponseAsync(IDictionary<string, object> environment)
         {
-            // определяем ответ
-            string responseText = "Hello ASP.NET Core";
-            // кодируем его в массив байтов
-            byte[] responseByte = Encoding.UTF8.GetBytes(responseText);
+            // получаем заголовки запроса
+            var requestHeaders = (IDictionary<string, string[]>)environment["owin.RequestHeaders"];
+            // получаем данные по User-Agent
+            string responseText = requestHeaders["User-Agent"][0];
+            byte[] responseBytes = Encoding.UTF8.GetBytes(responseText);
 
-            // получаем поток ответа
             var responseStream = (Stream)environment["owin.ResponseBody"];
-            // отправка ответа
-            return responseStream.WriteAsync(responseByte, 0, responseByte.Length);
+
+            return responseStream.WriteAsync(responseBytes, 0, responseBytes.Length);
         }
+
     }
 }
