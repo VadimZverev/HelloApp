@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,7 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
-            loggerFactory.AddConsole();
+            loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
 
             app.Run(async (context) =>
             {
