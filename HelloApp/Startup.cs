@@ -17,12 +17,12 @@ namespace HelloApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IMessageSender, EmailMessageSender>();
-            services.AddTransient<MessageService>();
+            //services.AddTransient<MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
-            IHostingEnvironment env, MessageService messageService)
+            IHostingEnvironment env /*, MessageService messageService*/)
         {
             if (env.IsDevelopment())
             {
@@ -31,7 +31,8 @@ namespace HelloApp
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync(messageService.Send());
+                IMessageSender messageSender = context.RequestServices.GetService<IMessageSender>();
+                await context.Response.WriteAsync(messageSender.Send());
             });
         }
     }
