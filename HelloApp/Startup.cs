@@ -16,8 +16,8 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ICounter, RandomCounter>();
-            services.AddScoped<CounterService>();
+            services.AddSingleton<ICounter, RandomCounter>();
+            services.AddSingleton<CounterService>();
         }
 
         // Transient - объект сервиса создается каждый раз, когда к нему обращается запрос.
