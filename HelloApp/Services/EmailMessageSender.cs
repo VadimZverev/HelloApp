@@ -4,7 +4,7 @@
     {
         public string Send()
         {
-            return "Sent by SMS";
+            return "Sent by Email";
         }
     }
 }
