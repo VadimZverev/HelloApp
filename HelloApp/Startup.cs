@@ -16,13 +16,12 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddTransient<IMessageSender, SmsMessageSender>();
-            //services.AddTransient<TimeService>();
-            services.AddTimeService();
+            services.AddTransient<IMessageSender, EmailMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TimeService timeService /* IMessageSender messageSender*/)
+        public void Configure(IApplicationBuilder app, 
+            IHostingEnvironment env, IMessageSender messageSender)
         {
             if (env.IsDevelopment())
             {
@@ -31,9 +30,7 @@ namespace HelloApp
 
             app.Run(async (context) =>
             {
-                context.Response.ContentType = "text/html; charset=utf-8";
-                await context.Response.WriteAsync($"Текущее время: {timeService?.GetTime()}");
-                //await context.Response.WriteAsync(messageSender.Send());
+                await context.Response.WriteAsync(messageSender.Send());
             });
         }
     }
