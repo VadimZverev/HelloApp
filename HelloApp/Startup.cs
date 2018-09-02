@@ -15,8 +15,8 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ITimer, Timer>();
-            services.AddScoped<TimeService>();
+            services.AddScoped<ITimer, Timer>();
+            services.AddTransient<TimeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
