@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
 namespace HelloApp
@@ -15,16 +13,18 @@ namespace HelloApp
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, TimeService timeService)
+        public async Task InvokeAsync(HttpContext context)
         {
+            context.Response.ContentType = "text/html; charset=utf-8";
+
             if (context.Request.Path.Value.ToLower() == "/time")
             {
-                context.Response.ContentType = "text/html;charset=utf-8";
+                TimeService timeService = context.RequestServices.GetService<TimeService>();
                 await context.Response.WriteAsync($"Текущее время: {timeService?.Time}");
             }
             else
             {
-                await _next.Invoke(context);
+                await context.Response.WriteAsync("парамметр не определён");
             }
         }
     }
