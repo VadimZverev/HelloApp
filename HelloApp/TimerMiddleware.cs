@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace HelloApp
 {
-    public class TimeMiddleware
+    public class TimerMiddleware
     {
         private readonly RequestDelegate _next;
         TimeService _timeService;
 
-        public TimeMiddleware(RequestDelegate next, TimeService timeService)
+        public TimerMiddleware(RequestDelegate next, TimeService timeService)
         {
             _next = next;
             _timeService = timeService;
