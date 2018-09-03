@@ -18,8 +18,8 @@ namespace HelloApp
             var builder = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    {"firsname", "Tom" },
-                    {"age", "31" }
+                    {"color", "blue" },
+                    {"text", "Hello ASP.NET 5" }
                 });
 
             // создаём конфигурацию
@@ -36,12 +36,11 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            AppConfiguration["firstname"] = "alice";
-            AppConfiguration["lastname"] = "simpson";
+            var color = AppConfiguration["color"];
+            var text = AppConfiguration["text"];
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync(AppConfiguration["firstname"] + " "
-                    + AppConfiguration["lastname"]);
+                await context.Response.WriteAsync($"<p style='color:{color};'>{text}</p>");
             });
         }
     }
