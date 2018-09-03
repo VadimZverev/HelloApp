@@ -16,8 +16,7 @@ namespace HelloApp
         {
             // строитель конфигурации
             var builder = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .AddIniFile("conf.ini");
+                .AddEnvironmentVariables();
 
             // создаём конфигурацию
             AppConfiguration = builder.Build();
