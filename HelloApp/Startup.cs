@@ -36,9 +36,12 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            AppConfiguration["firstname"] = "alice";
+            AppConfiguration["lastname"] = "simpson";
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response.WriteAsync(AppConfiguration["firstname"] + " "
+                    + AppConfiguration["lastname"]);
             });
         }
     }
