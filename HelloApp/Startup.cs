@@ -12,15 +12,12 @@ namespace HelloApp
 {
     public class Startup
     {
-        public Startup()
+        public Startup(IHostingEnvironment env)
         {
             // строитель конфигурации
             var builder = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>
-                {
-                    {"color", "blue" },
-                    {"text", "Hello ASP.NET 5" }
-                });
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("conf.json");
 
             // создаём конфигурацию
             AppConfiguration = builder.Build();
