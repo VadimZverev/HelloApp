@@ -16,7 +16,14 @@ namespace HelloApp
         {
             // строитель конфигурации
             var builder = new ConfigurationBuilder()
-                .AddEnvironmentVariables();
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("conf.json")
+                .AddEnvironmentVariables()
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    {"firstname", "Tom"},
+                    { "age", "31"}
+                });
 
             // создаём конфигурацию
             AppConfiguration = builder.Build();
@@ -32,11 +39,11 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            string java_dir = AppConfiguration["JAVA_HOME"] ?? "not set";
-            var text = AppConfiguration["text"];
+            var color = AppConfiguration["color"];      // определён в файле conf.json
+            var text = AppConfiguration["firstname"];   // определён в памяти
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync(java_dir);
+                await context.Response.WriteAsync($"<p style='color:{color};'>{text}</p>");
             });
         }
     }
