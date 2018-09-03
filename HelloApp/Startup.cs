@@ -17,7 +17,7 @@ namespace HelloApp
             // строитель конфигурации
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("conf.json");
+                .AddXmlFile("config.xml");
 
             // создаём конфигурацию
             AppConfiguration = builder.Build();
