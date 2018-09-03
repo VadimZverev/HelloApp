@@ -5,30 +5,51 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HelloApp
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public Startup(IHostingEnvironment env)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("project.json");
+            AppConfiguration = builder.Build();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+        public IConfiguration AppConfiguration { get; set; }
 
+        public void ConfigureServices(IServiceCollection services) { }
+
+        public void Configure(IApplicationBuilder app)
+        {
+            string projectJsonContent = GetSectionContent(AppConfiguration);
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response.WriteAsync("{\n" + projectJsonContent + "}");
             });
+        }
+
+        private string GetSectionContent(IConfiguration configSection)
+        {
+            string sectionContent = "";
+            foreach (var section in configSection.GetChildren())
+            {
+                sectionContent += "\"" + section.Key + "\":";
+                if (section.Value == null)
+                {
+                    string subSectionContent = GetSectionContent(section);
+                    sectionContent += "{\n" + subSectionContent + "},\n";
+                }
+                else
+                {
+                    sectionContent += "\"" + section.Value + "\",\n";
+                }
+            }
+            return sectionContent;
         }
     }
 }
