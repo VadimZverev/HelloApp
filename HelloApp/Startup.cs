@@ -12,14 +12,23 @@ namespace HelloApp
 {
     public class Startup
     {
-        public Startup(IConfiguration config)
+        public Startup()
         {
-            AppConfiguration = config;
+            var builder = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    { "color", "red"},
+                { "text", "Hello ASP.NET Core 2.1"}
+                });
+            AppConfiguration = builder.Build();
         }
 
         public IConfiguration AppConfiguration { get; set; }
 
-        public void ConfigureServices(IServiceCollection services) { }
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<IConfiguration>(provider => AppConfiguration);
+        }
 
         public void Configure(IApplicationBuilder app)
         {
