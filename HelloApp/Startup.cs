@@ -23,13 +23,7 @@ namespace HelloApp
 
         public void Configure(IApplicationBuilder app)
         {
-            var color = AppConfiguration["color"];
-            var text = AppConfiguration["text"];
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync($"<p style='color:{color};'>{text}</p>");
-            });
+            app.UseMiddleware<ConfigMiddleware>();
         }
     }
 }
