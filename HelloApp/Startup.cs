@@ -28,6 +28,10 @@ namespace HelloApp
 
             // Создание объекта Person по ключам из конфигурации
             services.Configure<Person>(AppConfiguration);
+            services.Configure<Person>(opt =>
+            {
+                opt.Age = 22;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
