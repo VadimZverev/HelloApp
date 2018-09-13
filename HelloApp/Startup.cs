@@ -29,6 +29,8 @@ namespace HelloApp
 
             var routeBuilder = new RouteBuilder(app);
 
+            routeBuilder.MapRoute("default", "store/{action}");
+
             routeBuilder.MapRoute("{controller}/{action}",
                 async context =>
                 {
