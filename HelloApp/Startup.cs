@@ -31,6 +31,11 @@ namespace HelloApp
 
             routeBuilder.MapRoute("default", "store/{action}");
 
+            routeBuilder.MapRoute("default", "{controller}/{action}/{id?}",
+                new { controller = "home", action = "index" });
+
+            routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+
             routeBuilder.MapRoute("{controller}/{action}/{id?}",
                 async context =>
                 {
