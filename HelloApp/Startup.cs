@@ -38,6 +38,8 @@ namespace HelloApp
 
             routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}/{*catchall}");
 
+            routeBuilder.MapRoute("default", "Ru{controller=Home}/{action=Index}-en/{id?}");
+
             routeBuilder.MapRoute("{controller}/{action}/{id?}",
                 async context =>
                 {
