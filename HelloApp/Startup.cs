@@ -31,7 +31,7 @@ namespace HelloApp
 
             routeBuilder.MapRoute("default", "store/{action}");
 
-            routeBuilder.MapRoute("{controller}/{action}",
+            routeBuilder.MapRoute("{controller}/{action}/{id?}",
                 async context =>
                 {
                     context.Response.ContentType = "text/html; charset=utf-8;";
