@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Routing;
 
 namespace HelloApp
 {
@@ -15,6 +16,7 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -24,6 +26,24 @@ namespace HelloApp
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var routeBuilder = new RouteBuilder(app);
+
+            routeBuilder.MapRoute("{controller}/{action}",
+                async context =>
+                {
+                    context.Response.ContentType = "text/html; charset=utf-8;";
+                    await context.Response.WriteAsync("Двухсегментный запрос");
+                });
+
+            routeBuilder.MapRoute("{controller}/{action}/{id}",
+                async context =>
+                {
+                    context.Response.ContentType = "text/html; charset=utf-8;";
+                    await context.Response.WriteAsync("Трёхсегментный запрос");
+                });
+
+            app.UseRouter(routeBuilder.Build());
 
             app.Run(async (context) =>
             {
