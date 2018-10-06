@@ -22,7 +22,7 @@ namespace HelloApp
                 // Handler
                 context.Handler = async ctx =>
                 {
-                    ctx.Response.ContentType = "text/html;charset=utf=8";
+                    ctx.Response.ContentType = "text/html;charset=utf-8";
                     await ctx.Response.WriteAsync("Привет Admin!");
                 };
 

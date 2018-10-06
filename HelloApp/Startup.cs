@@ -16,6 +16,7 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -25,6 +26,18 @@ namespace HelloApp
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var routeBuilder = new RouteBuilder(app);
+
+            routeBuilder.Routes.Add(new AdminRoute());
+
+            routeBuilder.MapRoute("{controler}/{action}",
+                async context =>
+                {
+                    context.Response.ContentType = "text/html;charset=utf-8";
+                    await context.Response.WriteAsync("Двухсегментный запрос");
+                });
+            app.UseRouter(routeBuilder.Build());
 
             app.Run(async (context) =>
             {
