@@ -96,6 +96,18 @@ namespace HelloApp
                     })
                 });
 
+            // Строчный синтаксис ограничений
+            routeBuilder.MapRoute("default", "{controller:regex(^H.*)}/{action}/{id?}");
+
+                // утановка рядо ограничений
+            routeBuilder.MapRoute("default", "{controller:length(4)}/{action:alpha}/{id:range(4,100)}");
+
+                // установка составного ограничения
+            routeBuilder.MapRoute(
+                name: "default",
+                template: "{controller}/{action:alpha:minlength(6)}/{id?}",
+                defaults: new { controller = "Home", action = "Index" });
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
