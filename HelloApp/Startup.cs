@@ -16,6 +16,10 @@ namespace HelloApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Установка сопоставления "position" с PositionConstraint
+            services.Configure<RouteOptions>(options =>
+                    options.ConstraintMap.Add("position", typeof(PositionConstraint)));
+
             services.AddRouting();
         }
 
@@ -26,8 +30,15 @@ namespace HelloApp
             {
                 app.UseDeveloperExceptionPage();
             }
+            var myRouteHandler = new RouteHandler(Handle);
+            var routeBuilder = new RouteBuilder(app, myRouteHandler);
 
-            var routeBuilder = new RouteBuilder(app);
+            // использование inline-ограничений
+            routeBuilder.MapRoute(
+                "default",
+                "{controller}/{action}/{id:position?}");
+
+            app.UseRouter(routeBuilder.Build());
 
             // Установка пользовательского ограничения
             routeBuilder.MapRoute("default",
@@ -45,6 +56,17 @@ namespace HelloApp
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+        }
+
+        private async Task Handle(HttpContext context)
+        {
+            var routeValues = context.GetRouteData().Values;
+            var action = routeValues["action"].ToString();
+            var controller = routeValues["controller"].ToString();
+            string id = routeValues["id"]?.ToString();
+
+            await context.Response.WriteAsync($"controller: {controller} | " +
+                                                $"action: {action} | id: {id}");
         }
     }
 }
