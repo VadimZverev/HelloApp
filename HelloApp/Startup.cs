@@ -82,6 +82,20 @@ namespace HelloApp
                     action = new MinLengthRouteConstraint(3)     // мин длина
                 });
 
+            // Составное ограничение
+            routeBuilder.MapRoute(
+                name: "default",
+                template: "{controller}/{action}/{id?}",
+                defaults: new { controller = "Home", action = "index" },
+                constraints: new
+                {
+                    action = new CompositeRouteConstraint(new IRouteConstraint[]
+                    {
+                        new AlphaRouteConstraint(),     // только из англ. алфавита
+                        new MinLengthRouteConstraint(6) // не менее 6 символов
+                    })
+                });
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
