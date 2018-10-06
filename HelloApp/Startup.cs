@@ -35,6 +35,12 @@ namespace HelloApp
                 null,
                 new { myConstraint = new CustomConstraint("/Home/Index/12") });
 
+            // Установка пользовательского ограничения для id
+            routeBuilder.MapRoute("default",
+                "{controller}/{action}/{id?}",
+                new { controller = "Home", action = "Index" },
+                new { id = new PositionConstraint() });
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
