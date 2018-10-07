@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MobileStore.Models;
 
 namespace MobileStore
 {
@@ -31,6 +33,11 @@ namespace MobileStore
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // получение строки подключения
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+
+            // добавление подкючения БД через контекст, используя SQLServer
+            services.AddDbContext<MobileContext>(options => options.UseSqlServer(connection));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
