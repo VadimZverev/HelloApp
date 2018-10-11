@@ -16,6 +16,7 @@ namespace MobileStore.Controllers
         {
             this.context = context;
         }
+
         public IActionResult Index()
         {
             return View(context.Phones.ToList());
