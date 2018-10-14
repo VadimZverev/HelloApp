@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HelloApp.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HelloApp.Controllers
 {
@@ -22,6 +23,12 @@ namespace HelloApp.Controllers
         {
             double s = a * h / 2;
             return $"Площадь треугольника с основанием {a} и высотой {h} равна {s}";
+        }
+
+        // Передача сложных объектов
+        public string SquareObject(Geometry geometry)
+        {
+            return $"Площадь треугольника с основанием {geometry.Altitude} и высотой {geometry.Height} равна {geometry.GetSquare()}";
         }
     }
 }
