@@ -64,7 +64,7 @@ namespace HelloApp.Controllers
         }
 
         [HttpPost]
-        public string SquarePost(Geometry geometry)
+        public string SquarePostObject(Geometry geometry)
         {
             return $"Площадь треугольника с основанием {geometry.Altitude} и высотой {geometry.Height} равна {geometry.GetSquare()}";
         }
