@@ -23,5 +23,17 @@ namespace HelloApp.Controllers
             // return LocalRedirect("http://microsoft.com");
 
         }
+
+        // Переадресация на метод действия
+        public IActionResult RedirToAction()
+        {
+            return RedirectToAction("Square", "Home", new { altitude = 10, height = 3 });
+        }
+
+        public IActionResult Square(int altitude, int height)
+        {
+            double square = altitude * height / 2;
+            return Content($"Площадь треугольника с основанием {altitude} и высотой {height} равна {square}");
+        }
     }
 }
