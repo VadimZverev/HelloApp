@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HelloApp.Util; // Пространство имен класса HtmlResult
+using Microsoft.AspNetCore.Mvc;
 
 namespace HelloApp.Controllers
 {
@@ -7,6 +8,11 @@ namespace HelloApp.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public HtmlResult GetHtml()
+        {
+            return new HtmlResult("<h2>Привет ASP.NET Core</h2>");
         }
     }
 }
