@@ -1,5 +1,6 @@
 ﻿using HelloApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace HelloApp.Controllers
@@ -67,6 +68,35 @@ namespace HelloApp.Controllers
         public string SquarePostObject(Geometry geometry)
         {
             return $"Площадь треугольника с основанием {geometry.Altitude} и высотой {geometry.Height} равна {geometry.GetSquare()}";
+        }
+
+        // Получение данных из контекста запроса
+
+        // через свойство Request.Query
+        public string QuerySquare()
+        {
+            string altitudeString = Request.Query.FirstOrDefault(p => p.Key == "altitude").Value;
+            int altitude = Int32.Parse(altitudeString);
+
+            string heightString = Request.Query.FirstOrDefault(p => p.Key == "altitude").Value;
+            int height = Int32.Parse(heightString);
+
+            double square = altitude * height / 2;
+            return $"Площадь треугольника с основанием {altitude} и высотой {height} равна {square}";
+        }
+
+        // через свойство Request.Forms
+        [HttpPost]
+        public string FormsSquare()
+        {
+            string altitudeString = Request.Form.FirstOrDefault(p => p.Key == "altitude").Value;
+            int altitude = Int32.Parse(altitudeString);
+
+            string heightString = Request.Form.FirstOrDefault(p => p.Key == "height").Value;
+            int height = Int32.Parse(heightString);
+
+            double square = altitude * height / 2;
+            return $"Площадь треугольника с основанием {altitude} и высотой {height} равна {square}";
         }
     }
 }
