@@ -4,9 +4,10 @@ namespace HelloApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        // Передача значения через параметр
+        public string Hello(int id)
         {
-            return View();
+            return $"id = {id}";
         }
     }
 }
