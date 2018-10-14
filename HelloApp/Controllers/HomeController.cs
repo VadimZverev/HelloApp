@@ -6,6 +6,11 @@ namespace HelloApp.Controllers
 {
     public class HomeController : Controller
     {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         // Передача значения через параметр
         // Строка запроса: https://localhost:44340/Home/Hello?id=9
         public string Hello(int id)
@@ -48,6 +53,20 @@ namespace HelloApp.Controllers
         public string SumObject(Geometry[] geoms)
         {
             return $"Сумма чисел равна {geoms.Sum(g => g.GetSquare())}";
+        }
+
+        // Передача данных в запросе POST
+        [HttpPost]
+        public string SquarePost(int altitude, int height)
+        {
+            double square = altitude * height / 2;
+            return $"Площадь треугольника с основанием {altitude} и высотой {height} равна {square}";
+        }
+
+        [HttpPost]
+        public string SquarePost(Geometry geometry)
+        {
+            return $"Площадь треугольника с основанием {geometry.Altitude} и высотой {geometry.Height} равна {geometry.GetSquare()}";
         }
     }
 }
