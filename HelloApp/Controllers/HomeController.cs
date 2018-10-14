@@ -11,5 +11,17 @@ namespace HelloApp.Controllers
             // Постоянная переадресация
             // return RedirectPermanent("~/Home/About");
         }
+
+        // Обращение к локальным адресам в системе, на которой развернут проект
+        public IActionResult LocalRedirect()
+        {
+            return LocalRedirect("~/Home/About");
+            // Постоянная переадресация
+            // return LocalRedirectPermanent("~/Home/About");
+
+            // Будет искл, если будет попытка перейти на внешний ресурс
+            // return LocalRedirect("http://microsoft.com");
+
+        }
     }
 }
