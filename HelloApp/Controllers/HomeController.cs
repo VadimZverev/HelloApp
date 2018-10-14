@@ -30,6 +30,19 @@ namespace HelloApp.Controllers
             return RedirectToAction("Square", "Home", new { altitude = 10, height = 3 });
         }
 
+        // Переадресация на метод действия по маршруту
+        public IActionResult RedirToRoute()
+        {
+            return RedirectToRoute("default",
+                new
+                {
+                    controller = "Home",
+                    action = "Square",
+                    height = 2,
+                    altitude = 20
+                });
+        }
+
         public IActionResult Square(int altitude, int height)
         {
             double square = altitude * height / 2;
