@@ -16,5 +16,12 @@ namespace HelloApp.Controllers
             double s = a * h / 2;
             return $"Площадь треугольника с основанием {a} и высотой {h} равна {s}";
         }
+
+        // Установка значений по умолчанию
+        public string SquareDefault(int a, int h)
+        {
+            double s = a * h / 2;
+            return $"Площадь треугольника с основанием {a} и высотой {h} равна {s}";
+        }
     }
 }
