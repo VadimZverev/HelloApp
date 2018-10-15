@@ -28,5 +28,19 @@ namespace HelloApp.Controllers
                 return Unauthorized();
             return Content("Проверка пройдена");
         }
+
+        // отправка кода 400
+        public IActionResult BadReq(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return BadRequest("Не указаны параметры запроса");
+            return View();
+        }
+
+        // отправка кода 200
+        public IActionResult OK()
+        {
+            return Ok("запрос успешно выполнен");
+        }
     }
 }
