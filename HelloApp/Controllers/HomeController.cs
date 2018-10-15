@@ -17,6 +17,7 @@ namespace HelloApp.Controllers
             return View();
         }
 
+        // отправка файла с помощью физического пути файла
         public IActionResult GetFile()
         {
             // Путь к файлу
@@ -26,6 +27,16 @@ namespace HelloApp.Controllers
             // Имя файла - необязательный параметр
             string file_name = "book.pdf";
             return PhysicalFile(file_path, file_type, file_name);
+        }
+
+        // Отправка файла через массив байт
+        public FileResult GetBytes()
+        {
+            string path = Path.Combine(_appEnvironment.ContentRootPath, "Files/book.pdf");
+            byte[] mas = System.IO.File.ReadAllBytes(path);
+            string file_type = "application/pdf";
+            string file_name = "book2.pdf";
+            return File(mas, file_type, file_name);
         }
     }
 }
