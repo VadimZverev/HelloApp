@@ -20,5 +20,13 @@ namespace HelloApp.Controllers
         {
             return NotFound("ресурс в приложении не найден");
         }
+
+        // отправка кода 401, если возраст не подходит
+        public IActionResult Age(int age)
+        {
+            if (age < 18)
+                return Unauthorized();
+            return Content("Проверка пройдена");
+        }
     }
 }
