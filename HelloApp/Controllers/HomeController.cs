@@ -8,5 +8,11 @@ namespace HelloApp.Controllers
         {
             return View();
         }
+
+        // отправка необходимого кода статуса
+        public IActionResult StatCode()
+        {
+            return StatusCode(401);
+        }
     }
 }
