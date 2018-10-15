@@ -14,5 +14,11 @@ namespace HelloApp.Controllers
         {
             return StatusCode(401);
         }
+
+        // отправка NotFoundResult(NotFoundObjectResult)
+        public IActionResult NoFound()
+        {
+            return NotFound("ресурс в приложении не найден");
+        }
     }
 }
