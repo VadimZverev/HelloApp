@@ -9,7 +9,7 @@ namespace HelloApp.Controllers
         private readonly IHostingEnvironment _appEnvironment;
         public HomeController(IHostingEnvironment appEnvironment)
         {
-            appEnvironment = _appEnvironment;
+            _appEnvironment = appEnvironment;
         }
 
         public IActionResult Index()
