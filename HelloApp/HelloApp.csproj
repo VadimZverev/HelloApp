@@ -5,8 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Files\Hello.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Files\" />
-    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Files\Hello.txt" />
   </ItemGroup>
 
   <ItemGroup>

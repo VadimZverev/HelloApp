@@ -48,5 +48,12 @@ namespace HelloApp.Controllers
             string file_name = "book3.pdf";
             return File(fs, file_type, file_name);
         }
+
+        // отправка файла через виртуальный путь
+        public VirtualFileResult GetVirtualFile()
+        {
+            var filepath = Path.Combine("~/Files", "Hello.txt");
+            return File(filepath, "text/plain", "Hello.txt");
+        }
     }
 }
