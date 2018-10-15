@@ -38,5 +38,15 @@ namespace HelloApp.Controllers
             string file_name = "book2.pdf";
             return File(mas, file_type, file_name);
         }
+
+        // Отправка файла через поток
+        public FileResult GetStream()
+        {
+            string path = Path.Combine(_appEnvironment.ContentRootPath, "Files/book.pdf");
+            FileStream fs = new FileStream(path, FileMode.Open);
+            string file_type = "application/pdf";
+            string file_name = "book3.pdf";
+            return File(fs, file_type, file_name);
+        }
     }
 }
