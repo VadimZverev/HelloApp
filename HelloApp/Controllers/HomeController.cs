@@ -20,5 +20,11 @@ namespace HelloApp.Controllers
             // Ответ сформированной строки в браузер
             Response.WriteAsync(string.Format($"<table>{table}</table><p>{userAgent}</p><p>{referer}</p>"));
         }
+
+        public void Answer()
+        {
+            Response.StatusCode = 404;
+            Response.WriteAsync("Ресурс не найден");
+        }
     }
 }
