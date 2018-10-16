@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HelloApp.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HelloApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ITimeService _timeService;
+
+        // передача зависимости через конструктор.
+        public HomeController(ITimeService timeServ)
         {
-            return View();
+            _timeService = timeServ;
+        }
+
+        public string Index()
+        {
+            return _timeService.Time;
         }
     }
 }

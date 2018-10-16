@@ -1,6 +1,6 @@
 ﻿namespace HelloApp.Models
 {
-    interface ITimeService
+    public interface ITimeService
     {
         string Time { get; set; }
     }
