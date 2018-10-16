@@ -2,11 +2,11 @@
 
 namespace HelloApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : HelloBaseController
     {
         public IActionResult Index()
         {
-            return View();
+            return Content("Запрос успешно выполнен");
         }
     }
 }
