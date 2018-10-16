@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace HelloApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        // Вывод всех имеющихся заголовков
+        public void Index()
         {
-            return View();
+            string table = "";
+            // Добавление в строку заголовком через запрос к ним
+            foreach (var header in Request.Headers)
+            {
+                table += $"<tr><td>{header.Key}</td><td>{header.Value}</td></tr>";
+            }
+            // Ответ сформированной строки в браузер
+            Response.WriteAsync(string.Format($"<table>{table}</table>"));
         }
     }
 }
