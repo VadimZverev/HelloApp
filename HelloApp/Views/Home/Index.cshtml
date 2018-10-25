@@ -217,5 +217,25 @@ while (z < 6)
     {
         <p>Блок finally</p>
     }
+
+    <h2>Вывод текста в блоке кода "@@:"</h2>
+
+    <pre>
+@@{
+    bool isEnabledd = true;
+  }
+@@if (isEnabledd)
+ {
+    @@:Добро пожаловать
+ }</pre>
+
+    @{
+        bool isEnabledd = true;
+    }
+    @if (isEnabledd)
+    {
+        @:Добро пожаловать
+    }
+
 </body>
 </html>
