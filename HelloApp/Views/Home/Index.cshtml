@@ -36,9 +36,8 @@
 @@{
    string head = "Привет Мир!!!";
    head += " Добро пожаловать на сайт!";
- }
+ }</pre>
     <h3>@head</h3>
-    </pre>
 
     <p>
         Вывод значения переменной без каких-либо html-элементов,
@@ -47,14 +46,176 @@
             <text>@i</text>
         }
         <text>@(i + 1)</text>
+
         <pre>
 @@{
     int i = 8;
     &lttext&gt@@i&lt/text&gt
-}
-</pre>
+    &lttext&gt@@(i+1)&lt/text&gt
+}</pre>
     </p>
 
-    <p>Для использования коментариев используются символы начала комментария @@* и конец комментария *@@</p>
+    <p>
+        Для использования коментариев используются символы начала
+        комментария @@* и конец комментария *@@
+    </p>
+
+    <h1>Управляющие конструкции</h1>
+
+    <h2>Оператор if-else:</h2>
+    <pre>
+@@{
+    string head1 = "Привет мир";
+    bool isEnabled = false;
+ }
+@@if (isEnabled)
+    {
+     &ltp&gtДобро пожаловать&lt/p&gt
+    }
+else
+   {
+     &ltp&gt@@head1&lt/p&gt
+   }</pre>
+
+    <p />
+    @{
+        string head1 = "Привет мир";
+        bool isEnabled = false;
+    }
+    @if (isEnabled)
+    {
+        <p>Добро пожаловать</p>
+    }
+    else
+    {
+        <p>Результат: @head1</p>
+    }
+
+    <h2>Оператор Switch:</h2>
+    <pre>
+&ltp/&gt@@{ int x = 6; }
+@@switch (x)
+ {
+    case 5:
+        &ltp&gt@@(x * x)&lt/p&gt
+        break;
+    case 6:
+        &ltp&gt@@(x + x)&lt/p&gt
+        break;
+ }</pre>
+
+    <p />@{ int x = 6;}
+    @switch (x)
+    {
+        case 5:
+            <p>Результат: @(x * x)</p>
+            break;
+        case 6:
+            <p>Результат: @(x + x)</p>
+            break;
+    }
+
+    <h2>Оператор for:</h2>
+
+    <pre>&ltp/&gt@@for (int j = 1; j < 6; j++)
+    {
+        &ltp>Строка: @@j&lt/p&gt
+    }</pre>
+
+    <p />@for (int j = 1; j < 6; j++)
+    {
+        <p>Строка: @j</p>
+    }
+
+    <h2>Оператор while:</h2>
+
+    <pre>
+&ltp/&gt@@{ int y = 1;}
+@@while (y < 6)
+ {
+    &ltp&gtСтрока: @@y&lt/p&gt
+    y++;
+ }</pre>
+
+    <p />@{ int y = 1;}
+    @while (y < 6)
+    {
+        <p>Строка: @y</p>
+        y++;
+    }
+
+    <h2>Оператор do..while:</h2>
+
+    <pre>
+&ltp/&gt@@{ int z = 1;}
+@@do
+ {
+    &ltp&gtСтрока: @@z&lt/p&gt
+ }
+while (z < 6)
+&ltp&gtКонец.&lt/p&gt</pre>
+
+    <p />@{ int z = 1;}
+    @do
+    {
+        <p>Строка: @z</p>
+        z++;
+    }
+    while (z < 6);
+    <p>Конец.</p>
+
+    <h2>Оператор foreach:</h2>
+
+    <pre>
+@@{
+    string[] phones = { "Lumia 950", "iPhone 6S", "Galaxy S 6", "LG G4" };
+ }
+
+&ltul>
+    @@foreach (var phone in phones)
+     {
+        &ltli&gt@@phone&lt/li&gt
+     }
+&lt/ul&gt</pre>
+
+    @{
+        string[] phones = { "Lumia 950", "iPhone 6S", "Galaxy S 6", "LG G4" };
+    }
+    <ul>
+        @foreach (var phone in phones)
+        {
+            <li>@phone</li>
+        }
+    </ul>
+
+    <h2>Оператор try...catch...finally:</h2>
+
+    <pre>
+@@try
+ {
+    throw new InvalidOperationException("Что-то пошло не так...");
+ }
+ catch (Exception ex)
+ {
+    &ltp&gtВозникло исключение: @@ex.Message&lt/p&gt
+ }
+ finally
+ {
+    &ltp&gtБлок finally&lt/p&gt
+ }
+</pre>
+
+    @try
+    {
+        throw new InvalidOperationException("Что-то пошло не так...");
+    }
+    catch (Exception ex)
+    {
+        <p>Возникло исключение: @ex.Message</p>
+    }
+    finally
+    {
+        <p>Блок finally</p>
+    }
 </body>
 </html>
