@@ -237,5 +237,35 @@ while (z < 6)
         @:Добро пожаловать
     }
 
+    <h2>Функции</h2>
+
+    <pre>
+@@functions{
+         public int GetFactorial(int n)
+         {
+             int result = 1;
+             for (int i = 1; i <= n; i++)
+             {
+                 result += i;
+             }
+             return result;
+         }
+ }
+ &ltdiv&gtФакториал числа 6 равен: @@GetFactorial(6)&lt/div&gt
+</pre>
+
+    @functions{
+        public int GetFactorial(int n)
+        {
+            int result = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                result += i;
+            }
+            return result;
+        }
+    }
+
+    <div>Факториал числа 6 равен: @GetFactorial(6)</div>
 </body>
 </html>
