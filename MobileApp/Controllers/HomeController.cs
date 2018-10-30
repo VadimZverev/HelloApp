@@ -17,7 +17,8 @@ namespace MobileApp.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            // передача данных в представление через ViewData["ключ"] = "Значение"
+            ViewData["Message"] = "Hello ASP.NET Core";
 
             return View();
         }
