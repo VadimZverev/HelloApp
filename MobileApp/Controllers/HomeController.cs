@@ -23,7 +23,11 @@ namespace MobileApp.Controllers
             // передача данных в представление через ViewBag.<Имя> = "Значение"
             ViewBag.Message_2 = "Hello ASP.NET Core via ViewBag";
 
+            // передача сложного объекта через ViewBag
             ViewBag.Countries = new List<string> { "Бразилия", "Аргентина", "Уругвай", "Чили" };
+
+            // передача данных в представление через TempData["ключ"] = "Значение"
+            TempData["Message"] = "Hello ASP.NET Core via TempData";
 
             return View();
         }
