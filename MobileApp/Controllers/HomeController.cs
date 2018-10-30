@@ -29,7 +29,10 @@ namespace MobileApp.Controllers
             // передача данных в представление через TempData["ключ"] = "Значение"
             TempData["Message"] = "Hello ASP.NET Core via TempData";
 
-            return View();
+            // передача данных в строго типизированное представление
+            List<string> countries = new List<string> { "Бразилия", "Аргентина", "Уругвай", "Чили" };
+
+            return View(countries);
         }
 
         public IActionResult Contact()

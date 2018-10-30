@@ -1,12 +1,20 @@
-﻿@{
+﻿@model List<string>
+@{
     ViewData["Title"] = "About";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 <h3>@ViewBag.Message_2</h3>
-<h3>В списке @(((List<string>)ViewBag.Countries).Count) элемента:</h3>
+@*<h3>В списке @(((List<string>)ViewBag.Countries).Count) элемента:</h3>
 
-@foreach (string country in ViewBag.Countries)
+    @foreach (string country in ViewBag.Countries)
+    {
+        <p>@country</p>
+    }*@
+
+<h3>В списке @Model.Count элемента:</h3>
+
+@foreach (string country in Model)
 {
     <p>@country</p>
 }
