@@ -8,5 +8,13 @@ namespace HelloApp.Controllers
         {
             return View();
         }
+
+        // Получение параметров маршрута в контроллере в методе действия
+        public IActionResult RouteContent()
+        {
+            var controller = RouteData.Values["controller"].ToString();
+            var action = RouteData.Values["action"].ToString();
+            return Content($"controller: {controller} | action: {action}");
+        }
     }
 }
