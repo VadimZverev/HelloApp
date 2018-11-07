@@ -17,5 +17,14 @@
         который можно использоваться для формированния ссылки для тега &lt;a&gt;:
         <a href="@Url.Action("Index", "Book", new { author = "Толстой", id = 10 }, null)">Толстой</a>
     </p>
+
+    <h3>@@Url.RouteUrl(new { controller = "Book", action = "Index", author = "Толстой", id = 10 })</h3>
+    <p>
+        При использовании этого хелпера будет просто формироваться путь маршрута
+        <b>"@Url.RouteUrl(new { controller = "Book", action = "Index", author = "Толстой", id = 10 })"</b>,
+        который можно использоваться для формированния ссылки для тега &lt;a&gt;:
+        <a href="@Url.RouteUrl(new { controller = "Book", action = "Index", author = "Толстой", id = 10 })">Толстой</a>
+    </p>
+
 </body>
 </html>
