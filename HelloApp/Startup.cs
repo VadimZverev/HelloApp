@@ -27,9 +27,18 @@ namespace HelloApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             // Установка маршрута для работы с контроллерами и их методами
             app.UseMvc(routes =>
             {
+                // Установка маршрута для использование областей.
+                // {area: exists} используется для того, чтоб маршрут сопоставлялся
+                //  с существующими областями.
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
