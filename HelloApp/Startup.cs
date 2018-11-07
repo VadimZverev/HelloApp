@@ -32,6 +32,16 @@ namespace HelloApp
             {
                 routes.MapRoute(
                     name: "default",
+                    template: "BookStore",
+                    defaults: new { controller = "Book", action = "Index" });
+
+                routes.MapRoute(
+                    name: "default1",
+                    template: "Store/Sub{action}",
+                    defaults: new { controller = "Home", action = "Index" });
+
+                routes.MapRoute(
+                    name: "default2",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }

@@ -10,6 +10,12 @@
     <title>Hello ASP.NET MVC Core</title>
 </head>
 <body>
-    <h2>Привет Мир!</h2>
+    <h3>@@Url.Action("Index", "Book", new { author = "Толстой", id = 10 }, null)</h3>
+    <p>
+        При использовании этого хелпера будет просто формироваться путь маршрута
+        <b>"@Url.Action("Index", "Book", new { author = "Толстой", id = 10 }, null)"</b>,
+        который можно использоваться для формированния ссылки для тега &lt;a&gt;:
+        <a href="@Url.Action("Index", "Book", new { author = "Толстой", id = 10 }, null)">Толстой</a>
+    </p>
 </body>
 </html>
