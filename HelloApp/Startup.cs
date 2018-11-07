@@ -35,9 +35,9 @@ namespace HelloApp
                 // Установка маршрута для использование областей.
                 // {area: exists} используется для того, чтоб маршрут сопоставлялся
                 //  с существующими областями.
-                routes.MapRoute(
-                    name: "areas",
-                    template: "{area:exists}/{controller=Home}/{action=Index}");
+                //routes.MapRoute(
+                //    name: "areas",
+                //    template: "{area:exists}/{controller=Home}/{action=Index}");
 
                 routes.MapRoute(
                     name: "default",
