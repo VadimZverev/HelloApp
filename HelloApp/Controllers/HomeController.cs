@@ -11,5 +11,12 @@ namespace HelloApp.Controllers
         {
             return View();
         }
+
+        // Также можно строить маршрут из параметров и ограничений для них.
+        [Route("{id:int}/{name:maxlength(10)}")]
+        public IActionResult Test(int id, string name)
+        {
+            return Content($" id = {id} | name = {name}");
+        }
     }
 }
