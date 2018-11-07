@@ -15,20 +15,20 @@
     <p>
         По этой ссылки @Html.ActionLink("Home", "Index", "Home"),
         сформируется маршрут <b>"@Url.Action("Index", "Home")"</b>.
-        Строится оно по шаблону указанному в стартовом классе Startup.cs.
+        Строится оно по шаблону, указанному в стартовом классе Startup.cs.
     </p>
     <h3>@@Html.ActionLink("Book", "Index", "Home")</h3>
     <p>
         По этой ссылки @Html.ActionLink("Book", "Index", "Book"),
         сформируется маршрут <b>"@Url.Action("Index", "Book")"</b>.
-        Строится оно по шаблону указанному в стартовом классе Startup.cs.
+        Строится оно по шаблону, указанному в стартовом классе Startup.cs.
     </p>
 
     <h3>@@Html.RouteLink("Все книги", new { action = "Index", controller = "Home" })</h3>
     <p>
         По этой ссылки @Html.RouteLink("Все книги", new { action = "Index", controller = "Home" }),
         сформируется маршрут <b>"@Url.Action("Index", "Home")"</b>.
-        Строится оно по шаблону указанному в стартовом классе Startup.cs.
+        Строится оно по шаблону, указанному в стартовом классе Startup.cs.
     </p>
 
     <h3>&lt;a asp-action="Index" asp-controller="Book"&gt;Книги&lt;/a&gt;</h3>
@@ -36,7 +36,14 @@
         По этой ссылки <a asp-action="Index" asp-controller="Book">Книги</a>,
         посредством tag-хелперов,
         сформируется маршрут <b>"@Url.Action("Index", "Book")"</b>.
-        Строится оно по шаблону указанному в стартовом классе Startup.cs.
+        Строится оно по шаблону, указанному в стартовом классе Startup.cs.
+    </p>
+
+    <h3>@@Html.ActionLink("Test", "Test", "Home")</h3>
+    <p>
+        По этой ссылки @Html.ActionLink("Test", "Test", "Home"),
+        сформируется маршрут <b>"@Url.Action("Test", "Home")"</b>.
+        Строится оно по шаблону, указанному в контроллере Home действия Test с помощь. атрибута Route.
     </p>
 </body>
 </html>

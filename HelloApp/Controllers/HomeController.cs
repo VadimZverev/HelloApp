@@ -8,5 +8,11 @@ namespace HelloApp.Controllers
         {
             return View();
         }
+
+        [Route("api/[controller]/[action]")]
+        public IActionResult Test()
+        {
+            return View("Index");
+        }
     }
 }
