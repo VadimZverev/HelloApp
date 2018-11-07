@@ -10,6 +10,18 @@
     <title>Hello ASP.NET MVC Core</title>
 </head>
 <body>
-    <h2>Привет Мир!</h2>
+    <h3>@@Html.ActionLink("Home", "Index", "Home")</h3>
+    <p>
+        По этой ссылки @Html.ActionLink("Home", "Index", "Home"),
+        сформируется маршрут <b>"@Url.Action("Index", "Home")"</b>.
+        Строится оно по шаблону указанному в стартовом классе Startup.cs.
+    </p>
+    <h3>@@Html.ActionLink("Book", "Index", "Home")</h3>
+    <p>
+        По этой ссылки @Html.ActionLink("Book", "Index", "Book"),
+        сформируется маршрут <b>"@Url.Action("Index", "Book")"</b>.
+        Строится оно по шаблону указанному в стартовом классе Startup.cs.
+    </p>
+    
 </body>
 </html>
