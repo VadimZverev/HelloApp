@@ -1,4 +1,5 @@
-﻿@{
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
     Layout = null;
 }
 
@@ -22,6 +23,20 @@
         сформируется маршрут <b>"@Url.Action("Index", "Book")"</b>.
         Строится оно по шаблону указанному в стартовом классе Startup.cs.
     </p>
-    
+
+    <h3>@@Html.RouteLink("Все книги", new { action = "Index", controller = "Home" })</h3>
+    <p>
+        По этой ссылки @Html.RouteLink("Все книги", new { action = "Index", controller = "Home" }),
+        сформируется маршрут <b>"@Url.Action("Index", "Home")"</b>.
+        Строится оно по шаблону указанному в стартовом классе Startup.cs.
+    </p>
+
+    <h3>&lt;a asp-action="Index" asp-controller="Book"&gt;Книги&lt;/a&gt;</h3>
+    <p>
+        По этой ссылки <a asp-action="Index" asp-controller="Book">Книги</a>,
+        посредством tag-хелперов,
+        сформируется маршрут <b>"@Url.Action("Index", "Book")"</b>.
+        Строится оно по шаблону указанному в стартовом классе Startup.cs.
+    </p>
 </body>
 </html>
