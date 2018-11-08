@@ -10,6 +10,7 @@
     <title>Hello ASP.NET MVC Core</title>
 </head>
 <body>
-    <h2>@await Component.InvokeAsync("BestPhone")</h2>
+    <h2>@await Component.InvokeAsync("BestPhone", new { maxprice = 55000 })</h2>
+    <h2>@await Component.InvokeAsync("BestPhone", new { maxprice = 60000, minprice = 20000 })</h2>
 </body>
 </html>
