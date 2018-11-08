@@ -26,7 +26,7 @@ namespace HelloApp.Components
         {
             var items = phones.Where(p => p.Value <= maxPrice).ToList();
 
-            return View(items);
+            return View("Phones",items);
         }
     }
 }
