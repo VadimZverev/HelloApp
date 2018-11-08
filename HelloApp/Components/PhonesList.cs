@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace HelloApp.Components
 {
-    public class BestPhone : ViewComponent
+    public class PhonesList : ViewComponent
     {
         Dictionary<string, int> phones;
-        public BestPhone()
+        public PhonesList()
         {
             phones = new Dictionary<string, int>
             {
@@ -26,7 +24,7 @@ namespace HelloApp.Components
 
         public IViewComponentResult Invoke(int maxPrice)
         {
-            var items = phones.OrderByDescending(p => p.Value <= maxPrice).ToList();
+            var items = phones.Where(p => p.Value <= maxPrice).ToList();
 
             return View(items);
         }
