@@ -24,16 +24,11 @@ namespace HelloApp.Components
             };
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int maxPrice)
         {
-            var item = phones.OrderByDescending(p => p.Value).Take(1).FirstOrDefault();
+            var items = phones.OrderByDescending(p => p.Value <= maxPrice).ToList();
 
-            // Возвращает объект ViewComponent с тектовым контентов
-            //return Content($"Самый дорогой телефон: {item.Key} - {item.Value.ToString("c")}");
-
-            // Возвращает объект ViewComponent в виде фрагмента кода HTML
-            return new HtmlContentViewComponentResult(
-                new HtmlString($"<h3>Самый дорогой телефон: {item.Key} - {item.Value.ToString("c")}</h3>"));
+            return View(items);
         }
     }
 }
