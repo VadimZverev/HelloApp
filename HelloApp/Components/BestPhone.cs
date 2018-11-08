@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,7 +28,12 @@ namespace HelloApp.Components
         {
             var item = phones.OrderByDescending(p => p.Value).Take(1).FirstOrDefault();
 
-            return Content($"Самый дорогой телефон: {item.Key} - {item.Value.ToString("c")}");
+            // Возвращает объект ViewComponent с тектовым контентов
+            //return Content($"Самый дорогой телефон: {item.Key} - {item.Value.ToString("c")}");
+
+            // Возвращает объект ViewComponent в виде фрагмента кода HTML
+            return new HtmlContentViewComponentResult(
+                new HtmlString($"<h3>Самый дорогой телефон: {item.Key} - {item.Value.ToString("c")}</h3>"));
         }
     }
 }
