@@ -1,6 +1,8 @@
 ﻿using HelloApp.Models;
+using HelloApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HelloApp.Controllers
 {
@@ -28,10 +30,26 @@ namespace HelloApp.Controllers
             };
         }
 
-        // передача списка в представление
-        public IActionResult Index()
+        public IActionResult Index(int? companyId)
         {
-            return View(phones);
+            // формируем список компаний для передачи в представление
+            List<CompanyModel> compModels = companies
+                .Select(c => new CompanyModel { Id = c.Id, Name = c.Name })
+                .ToList();
+
+            // добавляем напервое место опцию "Все"
+            compModels.Insert(0, new CompanyModel { Id = 0, Name = "Все" });
+
+            // формируем модель представления с данными
+            IndexViewModel ivm = new IndexViewModel { Companies = compModels, Phones = phones };
+
+            // если передан Id компании, фильтруется список
+            if (companyId != null && companyId > 0)
+            {
+                ivm.Phones = phones.Where(p => p.Manufacturer.Id == companyId);
+            }
+
+            return View(ivm);
         }
     }
 }
