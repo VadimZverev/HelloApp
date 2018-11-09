@@ -1,4 +1,6 @@
-﻿@{
+﻿@using HelloApp.Models
+@model IEnumerable<Phone>
+@{
     Layout = null;
 }
 
@@ -7,9 +9,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" charset="utf-8" />
-    <title>Hello ASP.NET MVC Core</title>
+    <title>Home Page</title>
 </head>
 <body>
-    <h2>Привет Мир!</h2>
+    <table>
+        @foreach (Phone p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Manufacturer?.Name</td>
+                <td>@p.Price</td>
+            </tr>
+        }
+    </table>
 </body>
 </html>
