@@ -1,5 +1,6 @@
 ﻿@using HelloApp.Models
-@model IEnumerable<Phone>
+@using HelloApp.ViewModels
+@model IndexViewModel
 @{
     Layout = null;
 }
@@ -12,8 +13,19 @@
     <title>Home Page</title>
 </head>
 <body>
+    <form>
+        <label>Выберете компанию:</label>
+        <select name="companyId">
+            @foreach (CompanyModel comp in Model.Companies)
+            {
+                <option value="@comp.Id">@comp.Name</option>
+            }
+        </select>
+        <input type="submit" />
+    </form>
+    <br />
     <table>
-        @foreach (Phone p in Model)
+        @foreach (Phone p in Model.Phones)
         {
             <tr>
                 <td>@p.Name</td>
