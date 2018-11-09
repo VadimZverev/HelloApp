@@ -13,8 +13,8 @@ namespace HelloApp.Controllers
         public HomeController()
         {
             Company apple = new Company { Id = 1, Name = "Apple", Country = "США" };
-            Company microsoft = new Company { Id = 1, Name = "Microsoft", Country = "США" };
-            Company google = new Company { Id = 1, Name = "Google", Country = "США" };
+            Company microsoft = new Company { Id = 2, Name = "Microsoft", Country = "США" };
+            Company google = new Company { Id = 3, Name = "Google", Country = "США" };
             companies = new List<Company> { apple, microsoft, google };
 
             phones = new List<Phone>
