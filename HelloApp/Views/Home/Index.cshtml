@@ -12,18 +12,10 @@
     <title>Home Page</title>
 </head>
 <body>
-    <table>
-        @foreach (Phone p in Model)
-        {
-            <tr>
-                <td>@p.Name</td>
-                <td>@p.Manufacturer?.Name</td>
-                <td>@p.Price</td>
-            </tr>
-        }
-    </table>
 
-    <h2>Передача сложных данных через форму.(различия видны в коде)</h2>
+    <h2>Передача сложных данных через форму.</h2>
+    <p>Различия видны в коде.</p>
+
     <h3>Вариант №1:</h3>
     @using (@Html.BeginForm("GetPhone", "Home"))
     {
@@ -59,6 +51,61 @@
             <label>Производитель</label><br />
             <input type="text" name="Manufacturer.Name" />
         </p>
+        <p>
+            <input type="submit" value="Отправить" />
+        </p>
+    }
+
+    <h2>Передача массивов и списков сложных объектов.</h2>
+    <p>Различия видны в коде.</p>
+
+    <h3>Вариант №1:</h3>
+    @using (@Html.BeginForm("GetPhones", "Home"))
+    {
+        @for (int i = 0; i < 2; i++)
+        {
+            <div>
+                <h3>Модель № @(i + 1)</h3>
+                <p>
+                    <label>Название</label><br />
+                    <input type="text" name="phones[@i].Name" />
+                </p>
+                <p>
+                    <label>Цена</label><br />
+                    <input type="number" name="phones[@i].Price" />
+                </p>
+                <p>
+                    <label>Производитель</label><br />
+                    <input type="text" name="phones[@i].Manufacturer.Name" />
+                </p>
+            </div>
+        }
+        <p>
+            <input type="submit" value="Отправить" />
+        </p>
+    }
+
+    <h3>Вариант №2:</h3>
+    @using (@Html.BeginForm("GetPhones", "Home"))
+    {
+        @for (int i = 0; i < 2; i++)
+        {
+            <div>
+                <h3>Модель № @(i + 1)</h3>
+                <p>
+                    <label>Название</label><br />
+                    <input type="text" name="[@i].Name" />
+                </p>
+                <p>
+                    <label>Цена</label><br />
+                    <input type="number" name="[@i].Price" />
+                </p>
+                <p>
+                    <label>Производитель</label><br />
+                    <input type="text" name="[@i].Manufacturer.Name" />
+                </p>
+            </div>
+        }
         <p>
             <input type="submit" value="Отправить" />
         </p>

@@ -6,32 +6,9 @@ namespace HelloApp.Controllers
 {
     public class HomeController : Controller
     {
-        List<Company> companies;
-        List<Phone> phones;
-
-        // Инициализация списков тестовыми данными
-        public HomeController()
-        {
-            Company apple = new Company { Id = 1, Name = "Apple", Country = "США" };
-            Company microsoft = new Company { Id = 2, Name = "Microsoft", Country = "США" };
-            Company google = new Company { Id = 3, Name = "Google", Country = "США" };
-            companies = new List<Company> { apple, microsoft, google };
-
-            phones = new List<Phone>
-            {
-                new Phone{ Id = 1, Manufacturer = apple, Name = "iPhone 6S", Price = 56000 },
-                new Phone{ Id = 2, Manufacturer = apple, Name = "iPhone 5S", Price = 41000 },
-                new Phone{ Id = 3, Manufacturer = microsoft, Name = "Lumia 550", Price = 9000 },
-                new Phone{ Id = 4, Manufacturer = microsoft, Name = "Lumia 950", Price = 40000 },
-                new Phone{ Id = 5, Manufacturer = google, Name = "Nexus 5X", Price = 30000 },
-                new Phone{ Id = 6, Manufacturer = google, Name = "Nexus 6P", Price = 50000 }
-            };
-        }
-
-        // передача списка в представление
         public IActionResult Index()
         {
-            return View(phones);
+            return View();
         }
 
         // Передача сложного объекта в метод контроллера
@@ -42,6 +19,20 @@ namespace HelloApp.Controllers
         {
             return Content($"Name: {myPhone?.Name} Price:{myPhone.Price} " +
                 $"Company: { myPhone?.Manufacturer?.Name}");
+        }
+
+        // Передача массивов и списков сложных объектов
+        // в строке запроса можно передавать двумя вариантами, при этом они будут аналогичными:
+        // 1. http://localhost/Home/GetPhones?phones[0].Name=Lumia950&phones[0].Price=30000&phones[0].Manufacturer.Name=Microsoft&phones[1].Name=iPhone6S&phones[1].Price=50000&phones[1].Manufacturer.Name=Apple
+        // 2. http://localhost/Home/GetPhones?[0].Name=Lumia950&[0].Price=30000&[0].Manufacturer.Name=Microsoft&[1].Name=iPhone6S&[1].Price=50000&[1].Manufacturer.Name=Apple
+        public IActionResult GetPhones(Phone[] phones)
+        {
+            string result = "";
+            foreach (var p in phones)
+            {
+                result += $"{p.Name} - {p.Price} - {p.Manufacturer.Name}\n";
+            }
+            return Content(result);
         }
     }
 }
