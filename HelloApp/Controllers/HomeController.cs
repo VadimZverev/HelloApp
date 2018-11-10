@@ -21,5 +21,12 @@ namespace HelloApp.Controllers
 
             return Content($"Кол-во ошибок: {ModelState.ErrorCount}");
         }
+
+        // Атрибут Bind указывает, какие параметры будут учавствовать в привязке
+        public IActionResult AddUserBind([Bind("Name")] User user)
+        {
+            string userInfo = $"Name: {user.Name} Age: {user.Age} HasRight: {user.HasRight}";
+            return Content(userInfo);
+        }
     }
 }
