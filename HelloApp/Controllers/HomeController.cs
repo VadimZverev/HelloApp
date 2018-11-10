@@ -42,6 +42,8 @@ namespace HelloApp.Controllers
         }
 
         // Привязчик FromQuery игнорирует форму и сразу читает из строки запроса
+        // Прежде чем отправить форму в строке запроса вручную вбейте данные 
+        // и посмотрите какие передаст данные в метод
         [HttpPost]
         public IActionResult AddUserQuery([FromQuery] User user)
         {
