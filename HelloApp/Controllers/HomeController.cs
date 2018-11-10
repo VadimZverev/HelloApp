@@ -33,5 +33,15 @@ namespace HelloApp.Controllers
         {
             return View(phones);
         }
+
+        // Передача сложного объекта в метод контроллера
+        // в строке запроса можно передавать двумя вариантами, при этом они будут аналогичными:
+        // 1. http://localhost/Home/GetPhone?myPhone.Price=24000&myPhone.Name=Nexus5X&myPhone.Manufacturer.Name=LG
+        // 2. http://localhost/Home/GetPhone?Price=24000&Name=Nexus5X&Manufacturer.Name=LG
+        public IActionResult GetPhone(Phone myPhone)
+        {
+            return Content($"Name: {myPhone?.Name} Price:{myPhone.Price} " +
+                $"Company: { myPhone?.Manufacturer?.Name}");
+        }
     }
 }
