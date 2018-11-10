@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HelloApp.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +17,14 @@ namespace HelloApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Добавление MVC, как сервис в проект
-            services.AddMvc();
+            //services.AddMvc();
+
+            // Добавление провайдера в mvc-архитектуру
+            services.AddMvc(opts =>
+            {
+                // установка нового провайдера в начало списка провайдеров.
+                opts.ModelBinderProviders.Insert(0, new CustomDateTimeModelBinderProvider());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
