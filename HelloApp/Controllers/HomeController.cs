@@ -28,5 +28,12 @@ namespace HelloApp.Controllers
             string userInfo = $"Name: {user.Name} Age: {user.Age} HasRight: {user.HasRight}";
             return Content(userInfo);
         }
+
+        // использование атрибута [FromHeader] для извлечения данных
+        // применяется если есть в методе 1 парметр, иначе вызывается исключение
+        public IActionResult GetUserAgent([FromHeader(Name = "User-Agent")] string userAgent)
+        {
+            return Content(userAgent);
+        }
     }
 }
