@@ -1,4 +1,6 @@
-﻿@{
+﻿@using HelloApp.Models;
+@model List<Event>
+@{
     Layout = null;
 }
 
@@ -10,6 +12,9 @@
     <title>Hello ASP.NET MVC Core</title>
 </head>
 <body>
-    <h2>Привет Мир!</h2>
+    @foreach (var p in Model)
+    {
+        <pre>@p.Id      @p.Name     @p.EventDate</pre>
+    }
 </body>
 </html>
