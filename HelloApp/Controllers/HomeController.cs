@@ -29,7 +29,7 @@ namespace HelloApp.Controllers
         [HttpPost]
         public IActionResult Create(Event ev)
         {
-            ev.Id = Guid.NewGuid().ToString();
+            //ev.Id = Guid.NewGuid().ToString();
             events.Add(ev);
             return RedirectToAction("Index");
         }

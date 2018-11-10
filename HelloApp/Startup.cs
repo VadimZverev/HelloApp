@@ -23,7 +23,8 @@ namespace HelloApp
             services.AddMvc(opts =>
             {
                 // установка нового провайдера в начало списка провайдеров.
-                opts.ModelBinderProviders.Insert(0, new CustomDateTimeModelBinderProvider());
+                opts.ModelBinderProviders.Insert(0, new EventModelBinderProvider());
+                //opts.ModelBinderProviders.Insert(1, new CustomDateTimeModelBinderProvider());
             });
         }
 
